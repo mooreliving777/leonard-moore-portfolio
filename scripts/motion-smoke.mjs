@@ -9,7 +9,7 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const server=createServer(async(req,res)=>{
  let name;
  try{name=decodeURIComponent(new URL(req.url,'http://localhost').pathname)}catch{res.writeHead(400).end();return}
- if(name==='/')name='/index.html';
+ if(name.endsWith('/'))name+='index.html';
  const file=path.resolve(root,'.'+name);
  if(!file.startsWith(root+path.sep)){res.writeHead(403).end();return}
  try{const content=await readFile(file);res.writeHead(200,{'Content-Type':path.extname(file)==='.css'?'text/css':path.extname(file)==='.js'?'text/javascript':'text/html; charset=utf-8'});res.end(content)}
