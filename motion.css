@@ -1,0 +1,32 @@
+
+/* Leonard E. Moore — signature motion layer. No motion on reduced-motion devices. */
+@media(prefers-reduced-motion:no-preference){
+body.motion-ready .hero-copy>.eyebrow,body.motion-ready .lab>.eyebrow{animation:lm-rise .56s cubic-bezier(.2,.7,.2,1) both}
+body.motion-ready .hero-copy>h1,body.motion-ready .lab>h1{animation:lm-rise .78s .1s cubic-bezier(.2,.7,.2,1) both}
+body.motion-ready .hero-copy>.lede,body.motion-ready .lab>.lede{animation:lm-rise .75s .21s cubic-bezier(.2,.7,.2,1) both}
+body.motion-ready .hero-copy>.actions{animation:lm-rise .76s .29s cubic-bezier(.2,.7,.2,1) both}
+body.motion-ready .hero-visual{animation:lm-arrive 1.08s .12s cubic-bezier(.2,.7,.2,1) both}
+body.motion-ready .orb-a{animation:lm-float 18s ease-in-out infinite alternate}
+body.motion-ready .orb-b{animation:lm-float 23s -8s ease-in-out infinite alternate-reverse}
+.lm-reveal{opacity:0;transform:translate3d(0,25px,0);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:var(--lm-delay,0ms)}
+.lm-reveal.lm-visible{opacity:1;transform:none}
+.lm-progress{position:fixed;left:0;top:0;width:100%;height:3px;background:linear-gradient(90deg,#ffd700,#ab9afc);transform:scaleX(0);transform-origin:left center;z-index:100;pointer-events:none}
+.project-card,.feature,.window{transition:transform .42s cubic-bezier(.2,.7,.2,1),border-color .35s,box-shadow .42s}
+@media(hover:hover){
+.project-card:hover,.feature:hover{transform:translate3d(0,-5px,0);border-color:#ffd70075}
+.window:hover{transform:perspective(1300px) rotateY(-4deg) rotateX(1deg) translate3d(0,-6px,0)}
+.btn:hover{transform:translate3d(0,-3px,0)}
+}
+@keyframes lm-rise{from{opacity:0;transform:translate3d(0,23px,0)}to{opacity:1;transform:none}}
+@keyframes lm-arrive{from{opacity:0;transform:translate3d(22px,12px,0) scale(.97)}to{opacity:1;transform:none}}
+@keyframes lm-float{from{transform:translate3d(-8px,0,0) scale(1)}to{transform:translate3d(12px,-12px,0) scale(1.09)}}
+}
+@media(prefers-reduced-motion:reduce){
+html{scroll-behavior:auto!important}
+.lm-reveal{opacity:1!important;transform:none!important;transition:none!important}
+.lm-progress{display:none!important}
+.orb-a,.orb-b,.hero-visual,.window,.project-card,.feature,.btn{animation:none!important;transition:none!important}
+}
+@media(hover:none){
+.project-card:hover,.feature:hover,.btn:hover{transform:none!important}
+}
