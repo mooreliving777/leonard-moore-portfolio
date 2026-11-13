@@ -34,13 +34,14 @@ try{
       css:[...document.styleSheets].some(x=>x.href?.endsWith('motion.css')),
       script:performance.getEntriesByType('resource').some(x=>x.name.endsWith('motion.js')),
       scrollWidth:document.documentElement.scrollWidth,
+      offenders:[...document.querySelectorAll('body *')].map(el=>({el,box:el.getBoundingClientRect()})).filter(({box})=>box.width&&(box.right>innerWidth+2||box.left<-2)).slice(0,15).map(({el,box})=>({tag:el.tagName,cls:String(el.className).slice(0,75),left:Math.round(box.left),right:Math.round(box.right)})),
       width:innerWidth,
       h1:document.querySelectorAll('h1').length
     }));
     assert.ok(state.css&&state.script&&state.h1===1,route+' assets and title');
     assert.equal(state.enabled,reducedMotion==='no-preference');
     assert.equal(state.bar,reducedMotion==='no-preference');
-    assert.ok(state.scrollWidth<=state.width+2,route+' overflow at '+width+' width '+state.scrollWidth);
+    assert.ok(state.scrollWidth<=state.width+2,route+' overflow at '+width+' width '+state.scrollWidth+' offenders '+JSON.stringify(state.offenders));
     assert.deepEqual(errors,[]);
     await context.close();
    }
