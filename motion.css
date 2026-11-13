@@ -30,3 +30,10 @@ html{scroll-behavior:auto!important}
 @media(hover:none){
 .project-card:hover,.feature:hover,.btn:hover{transform:none!important}
 }
+
+/* QA fix: decorative glowing orbs must not extend the layout beyond narrow phones. */
+@media(max-width:760px){
+ .hero-visual .orb-a,.hero-visual .orb-b{width:min(68vw,260px);height:min(68vw,260px)}
+ .hero-visual .orb-a{left:0}
+ .hero-visual .orb-b{right:12px}
+}
